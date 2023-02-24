@@ -17,7 +17,15 @@ let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 let allDrinkList = [];
 let favoriteDrinks = [];
 
-//Fetch para obtener los datos de la API
+//recuperar datos de la lista de favoritos desde el local storage
+
+const cocktelsFavorites = JSON.parse(localStorage.getItem('favoritos'));
+if (cocktelsFavorites) {
+  favoriteDrinks = cocktelsFavorites;
+  renderFavoriteList(favoriteDrinks);
+}
+
+//Fetch para obtener los datos de la API en la lista general
 
 fetch(url)
   .then((response) => response.json())
@@ -34,6 +42,7 @@ function renderCocktelsList(allDrinkList) {
   for (const cocktail of allDrinkList) {
     cocktailList.innerHTML += renderCocktails(cocktail);
   }
+
   addEventToCocktail();
 }
 
@@ -114,6 +123,16 @@ function addEventToCocktail() {
   }
 }
 
+//función para resetar
+
+function handleClickReset(ev) {
+  ev.preventDefault();
+  writeCocktail.value = '';
+  favoriteList.innerHTML = '';
+  localStorage.removeItem('favoritos');
+}
+
 //evento de búsqueda
 
 searchBtn.addEventListener('click', handleClickSearch);
+resetBtn.addEventListener('click', handleClickReset);
