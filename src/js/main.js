@@ -1,7 +1,6 @@
 'use strict';
 
 //Llamo a las constantes del html
-
 const writeCocktail = document.querySelector('.js-write-cocktail');
 const searchBtn = document.querySelector('.js-search');
 const resetBtn = document.querySelector('.js-reset');
@@ -9,16 +8,13 @@ const cocktailList = document.querySelector('.js-cocktail-list');
 const favoriteList = document.querySelector('.js-favorite-list');
 
 //creo una constante para la url para acortar.
-
 let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 
 //creo dos array para meter los cócteles
-
 let allDrinkList = [];
 let favoriteDrinks = [];
 
 //recuperar datos de la lista de favoritos desde el local storage
-
 const cocktelsFavorites = JSON.parse(localStorage.getItem('favoritos'));
 if (cocktelsFavorites) {
   favoriteDrinks = cocktelsFavorites;
@@ -26,7 +22,6 @@ if (cocktelsFavorites) {
 }
 
 //Fetch para obtener los datos de la API en la lista general
-
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
@@ -36,18 +31,15 @@ fetch(url)
   });
 
 //funcion para pintar todos los cócteles en la lista
-
 function renderCocktelsList(allDrinkList) {
   cocktailList.innerHTML = '';
   for (const cocktail of allDrinkList) {
     cocktailList.innerHTML += renderCocktails(cocktail);
   }
-
   addEventToCocktail();
 }
 
 //función para pintar todos los cócteles de la lista de favoritos
-
 function renderFavoriteList(favoriteDrinks) {
   favoriteList.innerHTML = '';
   for (const cocktail of favoriteDrinks) {
@@ -57,7 +49,6 @@ function renderFavoriteList(favoriteDrinks) {
 }
 
 //Pintar un cóctel de la lista
-
 function renderCocktails(cocktail) {
   let html = `<li>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
@@ -69,7 +60,6 @@ function renderCocktails(cocktail) {
 }
 
 //función de buscar un cóctel
-
 function handleClickSearch(ev) {
   ev.preventDefault();
   console.log('entro');
@@ -84,11 +74,7 @@ function handleClickSearch(ev) {
 }
 
 //función para seleccionar un li de la lista de cócteles y hacerle un click.
-
 function handleClickLi(ev) {
-  // console.log(ev.currentTarget.id);
-  ev.currentTarget.classList.toggle('selected'); //para poner y quitar el selected del li
-
   //Buscar con ese id en el listado de cocktails que cocktail tiene el id del curren target, lo hacemos con un find (devuelve el objeto)
   const idSelected = ev.currentTarget.id;
 
@@ -104,11 +90,13 @@ function handleClickLi(ev) {
 
   //Comprobar si ya existe el favorite
   if (indexCocktail === -1) {
-    //no está en el listado de favoritos
+    ev.currentTarget.classList.add('selected');
+    //no está en el listado de favorito y añado selected al pinchar
     //La guardo en el listado de favoritos: push
     favoriteDrinks.push(selectedCocktail);
   } else {
-    //si está en el listado de favoritos eliminarlo
+    ev.currentTarget.classList.remove('selected');
+    //si está en el listado de favoritos eliminarlo y eliminar la clase selected
     //splice: elimina un elemento a partir de una posición
     favoriteDrinks.splice(indexCocktail, 1);
   }
@@ -124,7 +112,6 @@ function addEventToCocktail() {
 }
 
 //función para resetar
-
 function handleClickReset(ev) {
   ev.preventDefault();
   writeCocktail.value = '';
@@ -133,6 +120,5 @@ function handleClickReset(ev) {
 }
 
 //evento de búsqueda
-
 searchBtn.addEventListener('click', handleClickSearch);
 resetBtn.addEventListener('click', handleClickReset);
