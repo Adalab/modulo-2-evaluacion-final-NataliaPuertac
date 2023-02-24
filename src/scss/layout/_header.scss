@@ -1,2 +1,8 @@
-.header {
+.img {
+  width: 100vw;
+  height: 100px;
+
+  @media all and (min-width: 768px) {
+    height: 200px;
+  }
 }

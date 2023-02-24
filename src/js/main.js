@@ -6,7 +6,7 @@ const searchBtn = document.querySelector('.js-search');
 const resetBtn = document.querySelector('.js-reset');
 const cocktailList = document.querySelector('.js-cocktail-list');
 const favoriteList = document.querySelector('.js-favorite-list');
-const buttonClose = document.querySelector('.js-btnClose');
+// const buttonClose = document.querySelector('.js-btnClose');
 
 //creo una constante para la url para acortar.
 let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
@@ -26,9 +26,19 @@ if (cocktelsFavorites) {
 fetch(url)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
     allDrinkList = data.drinks;
     renderCocktelsList(allDrinkList);
+
+    // console.log('holiiiii');
+    // console.log(allDrinkList);
+    // for (let itemDrink of allDrinkList) {
+    //   console.log('hwiiii');
+    //   const itemCocktel = favoriteDrinks.find(
+    //     (favorite) => favorite.idDrink === itemDrink.idDrink
+    //   );
+    //   console.log(itemCocktel);
+
+    // }
   });
 
 //funcion para pintar todos los cócteles en la lista
@@ -47,7 +57,7 @@ function renderFavoriteList(favoriteDrinks) {
     favoriteList.innerHTML += `<li class="listFinal"><section>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
         </article>
         </section>
         <input type="button" class="btnClose js-btnClose" value="X">
@@ -61,7 +71,7 @@ function renderCocktails(cocktail) {
   let html = `<li class="listFinal"><section>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
         </article>
         </section>
     </li> `;
@@ -71,7 +81,6 @@ function renderCocktails(cocktail) {
 //función de buscar un cóctel
 function handleClickSearch(ev) {
   ev.preventDefault();
-  console.log('entro');
   url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${writeCocktail.value}`;
   fetch(url)
     .then((response) => response.json())
@@ -130,11 +139,11 @@ function handleClickReset(ev) {
 }
 
 //función para quitar los elementos de la lista de favoritos
-function handleClickClose(ev) {
-  ev.preventDefault();
-}
+// function handleClickClose(ev) {
+// ev.preventDefault();
+// }
 
 //evento de búsqueda
 searchBtn.addEventListener('click', handleClickSearch);
 resetBtn.addEventListener('click', handleClickReset);
-buttonClose.addEventListener('click', handleClickClose);
+// buttonClose.addEventListener('click', handleClickClose);

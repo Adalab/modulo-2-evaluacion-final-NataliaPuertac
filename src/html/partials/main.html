@@ -1,29 +1,29 @@
 <main class="main">
-  <section>
-    <h2>Búscador de cócteles</h2>
+  <section class="main__section1">
+    <h2 class="main__title">Buscador de cócteles</h2>
     <form>
       <input
         type="text"
         placeholder="Encuentra tu cóctel"
-        class="js-write-cocktail"
+        class="main__input js-write-cocktail"
       />
-      <input type="button" value="buscar mi cóctel" class="js-search" />
       <input
         type="button"
-        value="borrar mi lista de favoritos"
-        class="js-reset"
+        value="buscar mi cóctel"
+        class="main__search js-search"
       />
+      <input type="button" value="reset" class="main__reset js-reset" />
     </form>
   </section>
 
-  <section class="section">
+  <section class="main__section2">
     <div>
-      <h2>Listado de cócteles</h2>
+      <h2 class="main__title2">Listado de cócteles</h2>
       <ul class="js-cocktail-list"></ul>
     </div>
 
     <div>
-      <h2>Mis cócteles favoritos</h2>
+      <h2 class="main__title2">Mis cócteles favoritos</h2>
       <ul class="js-favorite-list"></ul>
     </div>
   </section>
