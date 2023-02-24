@@ -50,11 +50,13 @@ function renderFavoriteList(favoriteDrinks) {
 
 //Pintar un cóctel de la lista
 function renderCocktails(cocktail) {
-  let html = `<li>
+  let html = `<li class="listFinal"><section>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
         <img src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
         </article>
+        </section>
+        <input type="button" class="btnClose" value="X">
     </li> `;
   return html;
 }
@@ -117,6 +119,7 @@ function handleClickReset(ev) {
   writeCocktail.value = '';
   favoriteList.innerHTML = '';
   localStorage.removeItem('favoritos');
+  location.reload();
 }
 
 //evento de búsqueda

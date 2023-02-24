@@ -9,3 +9,19 @@
   color: white;
   margin: 10px;
 }
+
+.listFinal {
+  display: flex;
+  flex-direction: row;
+}
+
+.btnClose {
+  height: 50px;
+  width: 50px;
+  margin-top: 15px;
+  margin-left: 20px;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+}
