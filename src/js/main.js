@@ -6,6 +6,7 @@ const searchBtn = document.querySelector('.js-search');
 const resetBtn = document.querySelector('.js-reset');
 const cocktailList = document.querySelector('.js-cocktail-list');
 const favoriteList = document.querySelector('.js-favorite-list');
+const buttonClose = document.querySelector('.js-btnClose');
 
 //creo una constante para la url para acortar.
 let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
@@ -43,7 +44,14 @@ function renderCocktelsList(allDrinkList) {
 function renderFavoriteList(favoriteDrinks) {
   favoriteList.innerHTML = '';
   for (const cocktail of favoriteDrinks) {
-    favoriteList.innerHTML += renderCocktails(cocktail);
+    favoriteList.innerHTML += `<li class="listFinal"><section>
+        <article class="js-li-cocktail" id=${cocktail.idDrink}>
+        <h3 class="cocktail_title">${cocktail.strDrink}</h3>
+        <img src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
+        </article>
+        </section>
+        <input type="button" class="btnClose js-btnClose" value="X">
+    </li> `;
   }
   localStorage.setItem('favoritos', JSON.stringify(favoriteDrinks)); //guardar en el local storage la lista de mis favoritos
 }
@@ -56,7 +64,6 @@ function renderCocktails(cocktail) {
         <img src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
         </article>
         </section>
-        <input type="button" class="btnClose" value="X">
     </li> `;
   return html;
 }
@@ -122,6 +129,12 @@ function handleClickReset(ev) {
   location.reload();
 }
 
+//función para quitar los elementos de la lista de favoritos
+function handleClickClose(ev) {
+  ev.preventDefault();
+}
+
 //evento de búsqueda
 searchBtn.addEventListener('click', handleClickSearch);
 resetBtn.addEventListener('click', handleClickReset);
+buttonClose.addEventListener('click', handleClickClose);
