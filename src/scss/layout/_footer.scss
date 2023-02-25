@@ -1,2 +1,12 @@
 .footer {
+  height: 100px;
+  background-color: #d2e7df;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer__paragraph {
+  font-size: 1.3rem;
+  padding-left: 50px;
 }
