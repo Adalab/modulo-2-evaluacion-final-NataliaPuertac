@@ -36,33 +36,47 @@ function renderCocktelsList(allDrinkList) {
     cocktailList.innerHTML += renderCocktails(cocktail);
   }
   addEventToCocktail();
+  removeAddSelected();
 }
 
 //función para pintar todos los cócteles de la lista de favoritos
 function renderFavoriteList(favoriteDrinks) {
   favoriteList.innerHTML = '';
   for (const cocktail of favoriteDrinks) {
+    // cocktail.strDrinkThumb = '';
+    let imgCoctel = '';
+    if (!cocktail.strDrinkThumb) {
+      imgCoctel = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
+    } else {
+      imgCoctel = cocktail.strDrinkThumb;
+    }
     favoriteList.innerHTML += `<li class="listFinal"><section>
-        <article class="js-li-cocktail" id=${cocktail.idDrink}>
+        <article class="js-li-favorite-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img class="cocktailImg" src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${imgCoctel}" alt="foto de cóctel">
         </article>
         </section>
-        <input type="button" class="btnClose js-btnClose" value="X">
+        <input type="button" class="btnClose js-btnClose" value="X" id=${cocktail.idDrink}>
     </li> `;
   }
-  console.log(favoriteDrinks);
   removeFavorite();
-  console.log(favoriteDrinks);
   localStorage.setItem('favoritos', JSON.stringify(favoriteDrinks)); //guardar en el local storage la lista de mis favoritos
 }
 
 //Pintar un cóctel de la lista
 function renderCocktails(cocktail) {
+  // cocktail.strDrinkThumb = '';
+  let imgCoctel = '';
+  if (!cocktail.strDrinkThumb) {
+    imgCoctel = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
+  } else {
+    imgCoctel = cocktail.strDrinkThumb;
+  }
+
   let html = `<li class="listFinal"><section>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img class="cocktailImg" src="${cocktail.strDrinkThumb}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${imgCoctel}" alt="foto de cóctel">
         </article>
         </section>
     </li> `;
@@ -84,32 +98,23 @@ function handleClickSearch(ev) {
 
 //función para seleccionar un li de la lista de cócteles.
 function handleClickLi(ev) {
-  //Buscar con ese id en el listado de cocktails que cocktail tiene el id del curren target, lo hacemos con un find (devuelve el objeto)
+  console.log(ev.currentTarget.id);
   const idSelected = ev.currentTarget.id;
-
-  //find : devuelve el primer elemento que cumpla una condición
+  console.log(ev.currentTarget);
   const selectedCocktail = allDrinkList.find(
     (cocktail) => cocktail.idDrink === idSelected
   );
-
-  //findeIndex: la posición donde está el elemento, o -1 sino está en el listado
   const indexCocktail = favoriteDrinks.findIndex(
     (cocktail) => cocktail.idDrink === idSelected
   );
-
-  //Comprobar si ya existe el favorite
+  console.log(indexCocktail);
   if (indexCocktail === -1) {
     ev.currentTarget.classList.add('selected');
-    //no está en el listado de favorito y añado selected al pinchar
-    //La guardo en el listado de favoritos: push
     favoriteDrinks.push(selectedCocktail);
   } else {
     ev.currentTarget.classList.remove('selected');
-    //si está en el listado de favoritos eliminarlo y eliminar la clase selected
-    //splice: elimina un elemento a partir de una posición
     favoriteDrinks.splice(indexCocktail, 1);
   }
-  //Pintar en el listado HTML de favoritos:
   renderFavoriteList(favoriteDrinks);
 }
 
@@ -139,13 +144,32 @@ function handleRemoveFavorite(ev) {
   );
   favoriteDrinks.splice(indexCocktail, 1);
   renderFavoriteList(favoriteDrinks);
+  removeAddSelected();
 }
 
-// Evento dentro de una función para quitar los elementos de la lista de favoritos recorriendo todos los botones
+// Pinchar sobre el botón
 function removeFavorite() {
   const buttonClose = document.querySelectorAll('.js-btnClose');
   for (const closeBtn of buttonClose) {
     closeBtn.addEventListener('click', handleRemoveFavorite);
+  }
+}
+
+//Quitar lo seleccionado o añadirlo si quitamos el favorito desde la lista de los favoritos con in botón
+function removeAddSelected() {
+  const allLi = document.querySelectorAll('.js-li-cocktail');
+  console.log(allLi);
+  for (let item1 of allLi) {
+    const findCocktel = favoriteDrinks.find(
+      (item) => item.idDrink === item1.id // pongo idDrink porque lo traigo del array del objeto e id porque lo cojo del html.
+    );
+    console.log(item1);
+    console.log(findCocktel);
+    if (findCocktel) {
+      item1.classList.add('selected');
+    } else {
+      item1.classList.remove('selected');
+    }
   }
 }
 
