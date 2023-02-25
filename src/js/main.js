@@ -6,7 +6,6 @@ const searchBtn = document.querySelector('.js-search');
 const resetBtn = document.querySelector('.js-reset');
 const cocktailList = document.querySelector('.js-cocktail-list');
 const favoriteList = document.querySelector('.js-favorite-list');
-// const buttonClose = document.querySelector('.js-btnClose');
 
 //creo una constante para la url para acortar.
 let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
@@ -28,17 +27,6 @@ fetch(url)
   .then((data) => {
     allDrinkList = data.drinks;
     renderCocktelsList(allDrinkList);
-
-    // console.log('holiiiii');
-    // console.log(allDrinkList);
-    // for (let itemDrink of allDrinkList) {
-    //   console.log('hwiiii');
-    //   const itemCocktel = favoriteDrinks.find(
-    //     (favorite) => favorite.idDrink === itemDrink.idDrink
-    //   );
-    //   console.log(itemCocktel);
-
-    // }
   });
 
 //funcion para pintar todos los cócteles en la lista
@@ -63,6 +51,9 @@ function renderFavoriteList(favoriteDrinks) {
         <input type="button" class="btnClose js-btnClose" value="X">
     </li> `;
   }
+  console.log(favoriteDrinks);
+  removeFavorite();
+  console.log(favoriteDrinks);
   localStorage.setItem('favoritos', JSON.stringify(favoriteDrinks)); //guardar en el local storage la lista de mis favoritos
 }
 
@@ -91,7 +82,7 @@ function handleClickSearch(ev) {
     });
 }
 
-//función para seleccionar un li de la lista de cócteles y hacerle un click.
+//función para seleccionar un li de la lista de cócteles.
 function handleClickLi(ev) {
   //Buscar con ese id en el listado de cocktails que cocktail tiene el id del curren target, lo hacemos con un find (devuelve el objeto)
   const idSelected = ev.currentTarget.id;
@@ -122,6 +113,7 @@ function handleClickLi(ev) {
   renderFavoriteList(favoriteDrinks);
 }
 
+//función para hacer click en casa uno de los li
 function addEventToCocktail() {
   const liElementsList = document.querySelectorAll('.js-li-cocktail');
   for (const li of liElementsList) {
@@ -138,12 +130,25 @@ function handleClickReset(ev) {
   location.reload();
 }
 
-//función para quitar los elementos de la lista de favoritos
-// function handleClickClose(ev) {
-// ev.preventDefault();
-// }
+// funcion para el btn de remove favorites
+function handleRemoveFavorite(ev) {
+  ev.preventDefault();
+  const idSelected = ev.currentTarget.id;
+  const indexCocktail = favoriteDrinks.findIndex(
+    (cocktail) => cocktail.idDrink === idSelected
+  );
+  favoriteDrinks.splice(indexCocktail, 1);
+  renderFavoriteList(favoriteDrinks);
+}
+
+// Evento dentro de una función para quitar los elementos de la lista de favoritos recorriendo todos los botones
+function removeFavorite() {
+  const buttonClose = document.querySelectorAll('.js-btnClose');
+  for (const closeBtn of buttonClose) {
+    closeBtn.addEventListener('click', handleRemoveFavorite);
+  }
+}
 
 //evento de búsqueda
 searchBtn.addEventListener('click', handleClickSearch);
 resetBtn.addEventListener('click', handleClickReset);
-// buttonClose.addEventListener('click', handleClickClose);
