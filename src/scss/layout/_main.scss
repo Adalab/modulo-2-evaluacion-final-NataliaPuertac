@@ -58,13 +58,32 @@
     color: aliceblue;
     cursor: pointer;
   }
+
+  &__divListado {
+    border: solid 4px green;
+    padding: 20px 20px;
+    border-radius: 20px;
+    background-color: #d2e7df;
+  }
+
+  &__cocktailList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    background-color: #d2e7df;
+    margin-bottom: 50px;
+  }
+
+  &__favoriteList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    min-width: 700px;
+    background-color: #d2e7df;
+  }
 }
 
-.section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
+//clases puestas directamente desde JS
 
 .selected {
   background-color: green;
@@ -100,27 +119,4 @@
 
 .cocktailImg {
   width: 17rem;
-}
-
-.cocktailList {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  background-color: #d2e7df;
-  margin-bottom: 50px;
-}
-
-.divListado {
-  border: solid 4px green;
-  padding: 20px 20px;
-  border-radius: 20px;
-  background-color: #d2e7df;
-}
-
-.favoriteList {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
-  min-width: 700px;
-  background-color: #d2e7df;
 }

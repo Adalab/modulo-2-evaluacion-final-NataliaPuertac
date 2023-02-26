@@ -7,7 +7,7 @@ const resetBtn = document.querySelector('.js-reset');
 const cocktailList = document.querySelector('.js-cocktail-list');
 const favoriteList = document.querySelector('.js-favorite-list');
 
-//creo una constante para la url para acortar.
+//creo una constante de la url para acortar.
 let url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita';
 
 //creo dos array para meter los cócteles
@@ -43,17 +43,17 @@ function renderCocktelsList(allDrinkList) {
 function renderFavoriteList(favoriteDrinks) {
   favoriteList.innerHTML = '';
   for (const cocktail of favoriteDrinks) {
-    // cocktail.strDrinkThumb = '';
-    let imgCoctel = '';
+    // cocktail.strDrinkThumb = ''; Lo uso para comprobar si de verdad funciona la foto forzando que entre en vacio.
+    let imgCocktail = '';
     if (!cocktail.strDrinkThumb) {
-      imgCoctel = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
+      imgCocktail = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
     } else {
-      imgCoctel = cocktail.strDrinkThumb;
+      imgCocktail = cocktail.strDrinkThumb;
     }
     favoriteList.innerHTML += `<li class="listFinal"><section>
         <article class="js-li-favorite-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img class="cocktailImg" src="${imgCoctel}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${imgCocktail}" alt="foto del cóctel">
         </article>
         </section>
         <input type="button" class="btnClose js-btnClose" value="X" id=${cocktail.idDrink}>
@@ -66,17 +66,17 @@ function renderFavoriteList(favoriteDrinks) {
 //Pintar un cóctel de la lista
 function renderCocktails(cocktail) {
   // cocktail.strDrinkThumb = '';
-  let imgCoctel = '';
+  let imgCocktail = '';
   if (!cocktail.strDrinkThumb) {
-    imgCoctel = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
+    imgCocktail = `https://via.placeholder.com/300x400/41c737/def7f6.png?text=Sin+fotografía`;
   } else {
-    imgCoctel = cocktail.strDrinkThumb;
+    imgCocktail = cocktail.strDrinkThumb;
   }
 
   let html = `<li class="listFinal"><section>
         <article class="js-li-cocktail" id=${cocktail.idDrink}>
         <h3 class="cocktail_title">${cocktail.strDrink}</h3>
-        <img class="cocktailImg" src="${imgCoctel}" alt="foto de cóctel">
+        <img class="cocktailImg" src="${imgCocktail}" alt="foto del cóctel">
         </article>
         </section>
     </li> `;
