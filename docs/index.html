@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Buscador de cócteles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Tilt+Neon&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="icon" href="./assets/images/favicon.png" />
+  </head>
+
+  <body>
+    <header>
+      <figure>
+        <img class="img" src="./assets/images/header.png" />
+      </figure>
+    </header>
+
+    <main class="main">
+      <section class="main__section1">
+        <h2 class="main__title">Mi coctelera favorita</h2>
+        <form>
+          <input
+            type="text"
+            placeholder="Encuentra tu cóctel"
+            class="main__input js-write-cocktail"
+          />
+          <input
+            type="button"
+            value="buscar mi cóctel"
+            class="main__search js-search"
+          />
+          <input type="button" value="reset" class="main__reset js-reset" />
+        </form>
+      </section>
+
+      <section class="main__section2">
+        <div class="main__divListado">
+          <h2 class="main__title2">Listado de cócteles</h2>
+          <ul class="main__cocktailList js-cocktail-list"></ul>
+        </div>
+
+        <div class="main__divListado">
+          <h2 class="main__title2">Mis preferidos</h2>
+          <ul class="main__favoriteList js-favorite-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__paragraph">
+        Developed by Natalia <i class="fa-regular fa-face-smile iconSmile"></i>
+      </p>
+    </footer>
+
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>
