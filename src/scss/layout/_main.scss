@@ -71,7 +71,7 @@
 
   &__cocktailList {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
     background-color: #d2e7df;
     margin-bottom: 50px;
@@ -81,7 +81,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
-    min-width: 700px;
+    min-width: 600px;
     background-color: #d2e7df;
   }
 }
@@ -102,14 +102,14 @@
 }
 
 .btnClose {
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   margin-top: 15px;
-  margin-left: 20px;
+  margin-left: 5px;
   background-color: green;
   color: white;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
   border-radius: 40%;
   cursor: pointer;
 }
